@@ -49,27 +49,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initReviewList() {
-        this.reviewAdapter.addItem(ReviewItem.builder().review("이거 정말 아름답습니다.").ratingGrade(3)
+        this.reviewAdapter.addItem(new ReviewItem.Builder().review("이거 정말 아름답습니다.").ratingGrade(3)
                 .recommendCnt(3).userId("nebi25")
                 .writeTime("30분전").userPicSrc(R.drawable.basic_user_pic).build());
 
 
-        this.reviewAdapter.addItem(ReviewItem.builder().review("정말 구리네요..").ratingGrade(1)
+        this.reviewAdapter.addItem(new ReviewItem.Builder().review("정말 구리네요..").ratingGrade(1)
                 .recommendCnt(1).userId("sohee3453")
                 .writeTime("1시간전").userPicSrc(R.drawable.moviepic).build());
 
 
-        this.reviewAdapter.addItem(ReviewItem.builder().review("한강의 야경은 너무 이뻐요").ratingGrade(4)
+        this.reviewAdapter.addItem(new ReviewItem.Builder().review("한강의 야경은 너무 이뻐요").ratingGrade(4)
                 .recommendCnt(4).userId("apdh1709")
                 .writeTime("3분전").userPicSrc(R.drawable.basic_user_pic).build());
 
 
-        this.reviewAdapter.addItem(ReviewItem.builder().review("이러기도 쉽지않은데").ratingGrade(3)
+        this.reviewAdapter.addItem(new ReviewItem.Builder().review("이러기도 쉽지않은데").ratingGrade(3)
                 .recommendCnt(3).userId("sayhos2")
                 .writeTime("52분전").userPicSrc(R.drawable.basic_user_pic).build());
 
 
-        this.reviewAdapter.addItem(ReviewItem.builder().review("평범치않은 사랑").ratingGrade(5)
+        this.reviewAdapter.addItem(new ReviewItem.Builder().review("평범치않은 사랑").ratingGrade(5)
                 .recommendCnt(5).userId("nebi2544")
                 .writeTime("14분전").userPicSrc(R.drawable.basic_user_pic).build());
 
@@ -77,84 +77,62 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initEventListener() {
-        this.thumbUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (thumbUpBtn.isSelected()) {
-                    thumbUpBtn.setSelected(false);
-                    thumbUpCnt.setText(String.valueOf(Integer.parseInt(thumbUpCnt.getText().toString()) - 1));
-                } else {
-                    thumbUpBtn.setSelected(true);
-                    thumbUpCnt.setText(String.valueOf(Integer.parseInt(thumbUpCnt.getText().toString()) + 1));
+        this.thumbUpBtn.setOnClickListener(view -> {
+            if (thumbUpBtn.isSelected()) {
+                thumbUpBtn.setSelected(false);
+                thumbUpCnt.setText(String.valueOf(Integer.parseInt(thumbUpCnt.getText().toString()) - 1));
+            } else {
+                thumbUpBtn.setSelected(true);
+                thumbUpCnt.setText(String.valueOf(Integer.parseInt(thumbUpCnt.getText().toString()) + 1));
 
-                    if (thumbDownBtn.isSelected()) {
-                        thumbDownBtn.setSelected(false);
-                        thumbDownCnt.setText(String.valueOf(Integer.parseInt(thumbDownCnt.getText().toString()) - 1));
-                    }
-                }
-            }
-        });
-
-        this.thumbDownBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 if (thumbDownBtn.isSelected()) {
                     thumbDownBtn.setSelected(false);
                     thumbDownCnt.setText(String.valueOf(Integer.parseInt(thumbDownCnt.getText().toString()) - 1));
-                } else {
-                    thumbDownBtn.setSelected(true);
-                    thumbDownCnt.setText(String.valueOf(Integer.parseInt(thumbDownCnt.getText().toString()) + 1));
-
-                    if (thumbUpBtn.isSelected()) {
-                        thumbUpBtn.setSelected(false);
-                        thumbUpCnt.setText(String.valueOf(Integer.parseInt(thumbUpCnt.getText().toString()) - 1));
-                    }
                 }
             }
         });
 
-        this.loginFacebookBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customToastController.sendToast("loginfacebookbtn click");
+        this.thumbDownBtn.setOnClickListener(view -> {
+            if (thumbDownBtn.isSelected()) {
+                thumbDownBtn.setSelected(false);
+                thumbDownCnt.setText(String.valueOf(Integer.parseInt(thumbDownCnt.getText().toString()) - 1));
+            } else {
+                thumbDownBtn.setSelected(true);
+                thumbDownCnt.setText(String.valueOf(Integer.parseInt(thumbDownCnt.getText().toString()) + 1));
+
+                if (thumbUpBtn.isSelected()) {
+                    thumbUpBtn.setSelected(false);
+                    thumbUpCnt.setText(String.valueOf(Integer.parseInt(thumbUpCnt.getText().toString()) - 1));
+                }
             }
         });
 
-        this.loginKakaoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customToastController.sendToast("loginKakaobtn click");
-            }
+        this.loginFacebookBtn.setOnClickListener(view -> {
+            customToastController.sendToast("loginfacebookbtn click");
         });
 
-        this.reviewWriteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customToastController.sendToast("reviewWriteBtn click");
-            }
+        this.loginKakaoBtn.setOnClickListener(view -> {
+            customToastController.sendToast("loginKakaobtn click");
         });
 
-        this.purchaseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customToastController.sendToast("purchaseBtn click");
-            }
+        this.reviewWriteBtn.setOnClickListener(view -> {
+            customToastController.sendToast("reviewWriteBtn click");
         });
 
-        this.seeAllBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customToastController.sendToast("seeAllBtn click");
-            }
+        this.purchaseBtn.setOnClickListener(view -> {
+            customToastController.sendToast("purchaseBtn click");
+
         });
 
-        this.reviewList.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mainScrollView.requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
+        this.seeAllBtn.setOnClickListener(view -> {
+            customToastController.sendToast("seeAllBtn click");
         });
+
+        this.reviewList.setOnTouchListener((view, event) -> {
+                    mainScrollView.requestDisallowInterceptTouchEvent(true);
+                    return false;
+                }
+        );
     }
 
     @Override
